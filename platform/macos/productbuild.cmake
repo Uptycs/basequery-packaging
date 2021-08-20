@@ -8,17 +8,17 @@
 #
 
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
-set(CPACK_COMMAND_PRODUCTBUILD "${OSQUERY_DATA_PATH}/control/pkg/productbuild.sh")
+set(CPACK_COMMAND_PRODUCTBUILD "${BASEQUERY_DATA_PATH}/control/pkg/productbuild.sh")
 set(CPACK_COMMAND_PKGBUILD "${CPACK_COMMAND_PRODUCTBUILD}")
 
 install(
   FILES
-    "${OSQUERY_DATA_PATH}/control/pkg/io.osquery.agent.conf"
-    "${OSQUERY_DATA_PATH}/control/pkg/io.osquery.agent.plist"
+    "${BASEQUERY_DATA_PATH}/control/pkg/io.basequery.agent.conf"
+    "${BASEQUERY_DATA_PATH}/control/pkg/io.basequery.agent.plist"
 
   DESTINATION
-    "/private/var/osquery"
+    "/private/var/basequery"
 
   COMPONENT
-    osquery
+    basequery
 )

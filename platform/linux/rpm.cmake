@@ -8,17 +8,17 @@
 #
 
 set(CPACK_STRIP_FILES ON)
-set(CPACK_RPM_PACKAGE_RELEASE "${OSQUERY_PACKAGE_RELEASE}")
+set(CPACK_RPM_PACKAGE_RELEASE "${BASEQUERY_PACKAGE_RELEASE}")
 set(CPACK_RPM_FILE_NAME "RPM-DEFAULT")
 set(CPACK_RPM_PACKAGE_DESCRIPTION "${CPACK_PACKAGE_DESCRIPTION}")
 set(CPACK_RPM_PACKAGE_GROUP "default")
 set(CPACK_RPM_PACKAGE_LICENSE "Apache 2.0 or GPL 2.0")
 set(CPACK_RPM_PACKAGE_REQUIRES "glibc >= 2.12, zlib")
-set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE "${OSQUERY_DATA_PATH}/control/postinst")
+set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE "${BASEQUERY_DATA_PATH}/control/postinst")
 
-if(DEFINED OSQUERY_SOURCE_DIRECTORY_LIST)
+if(DEFINED BASEQUERY_SOURCE_DIRECTORY_LIST)
   set(CPACK_RPM_DEBUGINFO_PACKAGE ON)
-  set(CPACK_RPM_BUILD_SOURCE_DIRS_PREFIX "/usr/src/debug/osquery")
+  set(CPACK_RPM_BUILD_SOURCE_DIRS_PREFIX "/usr/src/debug/basequery")
   set(CPACK_RPM_DEBUGINFO_FILE_NAME "RPM-DEFAULT")
 endif()
 
@@ -31,9 +31,9 @@ list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/rpm/etc/init.d/osqueryd"
+  FILES "${BASEQUERY_DATA_PATH}/control/rpm/etc/init.d/basequeryd"
   DESTINATION "/etc/init.d"
-  COMPONENT osquery
+  COMPONENT basequery
 
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -42,13 +42,13 @@ install(
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/rpm/lib/systemd/system/osqueryd.service"
+  FILES "${BASEQUERY_DATA_PATH}/control/rpm/lib/systemd/system/basequeryd.service"
   DESTINATION "lib/systemd/system"
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/rpm/etc/sysconfig/osqueryd"
+  FILES "${BASEQUERY_DATA_PATH}/control/rpm/etc/sysconfig/basequeryd"
   DESTINATION "/etc/sysconfig"
-  COMPONENT osquery
+  COMPONENT basequery
 )

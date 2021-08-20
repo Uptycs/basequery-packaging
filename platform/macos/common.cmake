@@ -7,53 +7,53 @@
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 #
 
-set(OSQUERY_PACKAGE_RELEASE "1.macos")
-set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_${OSQUERY_PACKAGE_RELEASE}_${CMAKE_SYSTEM_PROCESSOR}")
+set(BASEQUERY_PACKAGE_RELEASE "1.macos")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_${BASEQUERY_PACKAGE_RELEASE}_${CMAKE_SYSTEM_PROCESSOR}")
 set(CPACK_SET_DESTDIR ON)
 
 install(
   DIRECTORY
-    "${OSQUERY_DATA_PATH}/opt/osquery/osquery.app"
+    "${BASEQUERY_DATA_PATH}/opt/basequery/basequery.app"
 
   DESTINATION
-    "/opt/osquery/lib"
+    "/opt/basequery/lib"
 
   USE_SOURCE_PERMISSIONS
 
   COMPONENT
-    osquery
+    basequery
 )
 
 execute_process(
-  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/osquery/lib/osquery.app/Contents/MacOS/osqueryd" osqueryi
+  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/basequery/lib/basequery.app/Contents/MacOS/basequeryd" basequeryi
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 )
 
 execute_process(
-  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/osquery/lib/osquery.app/Contents/Resources/osqueryctl" osqueryctl
+  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/basequery/lib/basequery.app/Contents/Resources/basequeryctl" basequeryctl
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 )
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/osqueryi"
-    "${CMAKE_CURRENT_BINARY_DIR}/osqueryctl"
+    "${CMAKE_CURRENT_BINARY_DIR}/basequeryi"
+    "${CMAKE_CURRENT_BINARY_DIR}/basequeryctl"
   
   DESTINATION
     "/usr/local/bin/"
   
   COMPONENT
-    osquery
+    basequery
 )
 
 install(
-  DIRECTORY "${OSQUERY_DATA_PATH}/private/var/osquery"
+  DIRECTORY "${BASEQUERY_DATA_PATH}/private/var/basequery"
   DESTINATION "/private/var"
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
   DIRECTORY
-  DESTINATION "/private/var/log/osquery"
-  COMPONENT osquery
+  DESTINATION "/private/var/log/basequery"
+  COMPONENT basequery
 )

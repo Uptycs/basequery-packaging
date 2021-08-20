@@ -8,30 +8,30 @@
 #
 
 set(CPACK_STRIP_FILES ON)
-set(CPACK_DEBIAN_OSQUERY_PACKAGE_NAME "${CPACK_PACKAGE_NAME}")
-set(CPACK_DEBIAN_PACKAGE_RELEASE "${OSQUERY_PACKAGE_RELEASE}")
-set(CPACK_DEBIAN_OSQUERY_FILE_NAME "DEB-DEFAULT")
+set(CPACK_DEBIAN_BASEQUERY_PACKAGE_NAME "${CPACK_PACKAGE_NAME}")
+set(CPACK_DEBIAN_PACKAGE_RELEASE "${BASEQUERY_PACKAGE_RELEASE}")
+set(CPACK_DEBIAN_BASEQUERY_FILE_NAME "DEB-DEFAULT")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "extra")
 set(CPACK_DEBIAN_PACKAGE_SECTION "default")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>=2.12), zlib1g")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_PACKAGE_HOMEPAGE_URL}")
 set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_SOURCE_DIR}/control/deb/conffiles;${CMAKE_SOURCE_DIR}/control/postinst")
 
-if(DEFINED OSQUERY_SOURCE_DIRECTORY_LIST)
+if(DEFINED BASEQUERY_SOURCE_DIRECTORY_LIST)
   set(CPACK_DEB_COMPONENT_INSTALL ON)
   set(CPACK_DEBIAN_DEBUGINFO_PACKAGE ON)
 endif()
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/deb/lib/systemd/system/osqueryd.service"
+  FILES "${BASEQUERY_DATA_PATH}/control/deb/lib/systemd/system/basequeryd.service"
   DESTINATION "lib/systemd/system"
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/deb/etc/init.d/osqueryd"
+  FILES "${BASEQUERY_DATA_PATH}/control/deb/etc/init.d/basequeryd"
   DESTINATION "/etc/init.d"
-  COMPONENT osquery
+  COMPONENT basequery
 
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -40,7 +40,7 @@ install(
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/deb/etc/default/osqueryd"
+  FILES "${BASEQUERY_DATA_PATH}/control/deb/etc/default/basequeryd"
   DESTINATION "/etc/default"
-  COMPONENT osquery
+  COMPONENT basequery
 )

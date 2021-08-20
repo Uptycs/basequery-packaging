@@ -8,9 +8,9 @@
 #
 
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
-set(OSQUERY_BITNESS "" CACHE STRING "osquery build bitness (32 or 64)")
+set(BASEQUERY_BITNESS "" CACHE STRING "basequery build bitness (32 or 64)")
 
-if ("${OSQUERY_BITNESS}" STREQUAL "32")
+if ("${BASEQUERY_BITNESS}" STREQUAL "32")
   set(PROGRAM_FILES_DIR "Program Files (x86)")
 else()
   set(PROGRAM_FILES_DIR "Program Files")
@@ -22,32 +22,32 @@ set(directory_name_list
 )
 
 set(file_name_list
-  "manage-osqueryd.ps1"
-  "osquery.conf"
-  "osquery.flags"
-  "osquery.man"
-  "osquery_utils.ps1"
-  "osqueryi.exe"
+  "manage-basequeryd.ps1"
+  "basequery.conf"
+  "basequery.flags"
+  "basequery.man"
+  "basequery_utils.ps1"
+  "basequeryi.exe"
 )
 
 foreach(directory_name ${directory_name_list})
   install(
-    DIRECTORY "${OSQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/osquery/${directory_name}"
+    DIRECTORY "${BASEQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/basequery/${directory_name}"
     DESTINATION "."
-    COMPONENT osquery
+    COMPONENT basequery
   )
 endforeach()
 
 foreach(file_name ${file_name_list})
   install(
-    FILES "${OSQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/osquery/${file_name}"
+    FILES "${BASEQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/basequery/${file_name}"
     DESTINATION "."
-    COMPONENT osquery
+    COMPONENT basequery
   )
 endforeach()
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/osquery/osqueryd/osqueryd.exe"
-  DESTINATION "osqueryd"
-  COMPONENT osquery
+  FILES "${BASEQUERY_DATA_PATH}/${PROGRAM_FILES_DIR}/basequery/basequeryd/basequeryd.exe"
+  DESTINATION "basequeryd"
+  COMPONENT basequery
 )

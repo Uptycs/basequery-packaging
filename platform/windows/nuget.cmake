@@ -8,28 +8,25 @@
 #
 
 install(
-  DIRECTORY "${OSQUERY_DATA_PATH}/control/nupkg/tools"
+  DIRECTORY "${BASEQUERY_DATA_PATH}/control/nupkg/tools"
   DESTINATION "."
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/osquery.png"
+  FILES "${BASEQUERY_DATA_PATH}/control/basequery.png"
   DESTINATION "."
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
-  FILES "${OSQUERY_DATA_PATH}/control/LICENSE.txt"
+  FILES "${BASEQUERY_DATA_PATH}/control/LICENSE.txt"
   DESTINATION "."
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 set(CPACK_NUGET_PACKAGE_DESCRIPTION "
-  osquery allows you to easily ask questions about your Linux, macOS, and
-  Windows infrastructure. Whether your goal is intrusion detection, 
-  infrastructure reliability, or compliance, osquery gives you the ability
-  to empower and inform a broad set of organizations within your company.
+  basequery is a trimmed down version of Osquery.
   
   ### Package Parameters
     * `/InstallService` - This creates a new windows service that will 
@@ -39,18 +36,18 @@ set(CPACK_NUGET_PACKAGE_DESCRIPTION "
   `--params`. For example: `--params='/InstallService'`.
   "
 )
-set(OSQUERY_REPO "https://github.com/osquery/osquery/")
+set(BASEQUERY_REPO "https://github.com/basequery/basequery/")
 set(CPACK_NUGET_PACKAGE_AUTHORS "${CPACK_PACKAGE_NAME}")
 set(CPACK_NUGET_PACKAGE_TITLE "${CPACK_PACKAGE_NAME}")
 set(CPACK_NUGET_PACKAGE_OWNERS "${CPACK_PACKAGE_NAME}")
-set(CPACK_NUGET_PACKAGE_COPYRIGHT "Copyright (c) 2014-present, The osquery authors. See LICENSE.")
-set(CPACK_NUGET_PACKAGE_LICENSEURL "https://raw.githubusercontent.com/osquery/osquery/master/LICENSE")
-set(CPACK_NUGET_PACKAGE_ICON "osquery.png")
+set(CPACK_NUGET_PACKAGE_COPYRIGHT "Copyright (c) 2014-present, The basequery authors. See LICENSE.")
+set(CPACK_NUGET_PACKAGE_LICENSEURL "https://raw.githubusercontent.com/basequery/basequery/master/LICENSE")
+set(CPACK_NUGET_PACKAGE_ICON "basequery.png")
 set(CPACK_NUGET_PACKAGE_DESCRIPTION_SUMMARY "
-  osquery gives you the ability to query and log things like running 
+  basequery gives you the ability to query and log things like running 
   processes, logged in users, password changes, usb devices, firewall 
   exceptions, listening ports, and more.
   "
 )
-set(CPACK_NUGET_PACKAGE_RELEASE_NOTES "${OSQUERY_REPO}releases/tag/${CPACK_PACKAGE_VERSION}")
+set(CPACK_NUGET_PACKAGE_RELEASE_NOTES "${BASEQUERY_REPO}releases/tag/${CPACK_PACKAGE_VERSION}")
 set(CPACK_NUGET_PACKAGE_TAGS "infosec tools security")

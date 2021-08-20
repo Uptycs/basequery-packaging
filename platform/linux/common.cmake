@@ -7,30 +7,30 @@
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 #
 
-set(OSQUERY_PACKAGE_RELEASE "1.linux")
-set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_${OSQUERY_PACKAGE_RELEASE}_${CMAKE_SYSTEM_PROCESSOR}")
+set(BASEQUERY_PACKAGE_RELEASE "1.linux")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}_${BASEQUERY_PACKAGE_RELEASE}_${CMAKE_SYSTEM_PROCESSOR}")
 
-set(OSQUERY_SOURCE_DIRECTORY_LIST "" CACHE PATH "osquery source and build folders")
+set(BASEQUERY_SOURCE_DIRECTORY_LIST "" CACHE PATH "basequery source and build folders")
 
-if(NOT "${OSQUERY_SOURCE_DIRECTORY_LIST}" STREQUAL "")
-  set(CPACK_BUILD_SOURCE_DIRS "${OSQUERY_SOURCE_DIRECTORY_LIST}")
+if(NOT "${BASEQUERY_SOURCE_DIRECTORY_LIST}" STREQUAL "")
+  set(CPACK_BUILD_SOURCE_DIRS "${BASEQUERY_SOURCE_DIRECTORY_LIST}")
 
-  message(STATUS "OSQUERY_SOURCE_DIRECTORY_LIST was set, enabling debug packages")
+  message(STATUS "BASEQUERY_SOURCE_DIRECTORY_LIST was set, enabling debug packages")
 else()
-  message(STATUS "OSQUERY_SOURCE_DIRECTORY_LIST was not set, disabling debug packages")
+  message(STATUS "BASEQUERY_SOURCE_DIRECTORY_LIST was not set, disabling debug packages")
 endif()
 
 install(
   FILES
-    "${OSQUERY_DATA_PATH}/usr/local/bin/osqueryd"
-    "${OSQUERY_DATA_PATH}/usr/local/bin/osqueryi"
-    "${OSQUERY_DATA_PATH}/usr/local/bin/osqueryctl"
+    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryd"
+    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryi"
+    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryctl"
 
   DESTINATION
     "bin"
 
   COMPONENT
-    osquery
+    basequery
 
   PERMISSIONS
     OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -39,25 +39,25 @@ install(
 )
 
 install(
-  DIRECTORY "${OSQUERY_DATA_PATH}/usr/local/share/osquery"
+  DIRECTORY "${BASEQUERY_DATA_PATH}/usr/local/share/basequery"
   DESTINATION "share"
-  COMPONENT osquery
+  COMPONENT basequery
 )
 
 install(
   DIRECTORY
-  DESTINATION "/etc/osquery"
-  COMPONENT osquery
+  DESTINATION "/etc/basequery"
+  COMPONENT basequery
 )
 
 install(
   DIRECTORY
-  DESTINATION "/var/osquery"
-  COMPONENT osquery
+  DESTINATION "/var/basequery"
+  COMPONENT basequery
 )
 
 install(
   DIRECTORY
-  DESTINATION "/var/log/osquery"
-  COMPONENT osquery
+  DESTINATION "/var/log/basequery"
+  COMPONENT basequery
 )
