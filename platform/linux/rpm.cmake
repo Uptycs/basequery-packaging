@@ -43,7 +43,7 @@ install(
 
 install(
   FILES "${BASEQUERY_DATA_PATH}/control/rpm/lib/systemd/system/basequeryd.service"
-  DESTINATION "lib/systemd/system"
+  DESTINATION "/usr/lib/systemd/system"
   COMPONENT basequery
 )
 

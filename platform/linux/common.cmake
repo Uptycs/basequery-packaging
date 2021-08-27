@@ -20,12 +20,20 @@ else()
   message(STATUS "BASEQUERY_SOURCE_DIRECTORY_LIST was not set, disabling debug packages")
 endif()
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "/opt/basequery" CACHE PATH "" FORCE)
+endif()
+
+if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
+  set(CPACK_PACKAGING_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
+endif()
+
+
 install(
   FILES
-    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryd"
-    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryi"
-    "${BASEQUERY_DATA_PATH}/usr/local/bin/basequeryctl"
-
+    "${BASEQUERY_DATA_PATH}/opt/basequery/bin/basequeryd"
+    "${BASEQUERY_DATA_PATH}/opt/basequery/bin/basequeryctl"
+  
   DESTINATION
     "bin"
 
@@ -38,8 +46,30 @@ install(
     WORLD_READ             WORLD_EXECUTE 
 )
 
+execute_process(
+  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/basequery/bin/basequeryd" basequeryi
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+)
+
+execute_process(
+  COMMAND "${CMAKE_COMMAND}" -E create_symlink "/opt/basequery/bin/basequeryctl" basequeryctl
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+)
+
 install(
-  DIRECTORY "${BASEQUERY_DATA_PATH}/usr/local/share/basequery"
+  FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/basequeryi"
+    "${CMAKE_CURRENT_BINARY_DIR}/basequeryctl"
+  
+  DESTINATION
+    "/usr/local/bin/"
+  
+  COMPONENT
+    basequery
+)
+
+install(
+  DIRECTORY "${BASEQUERY_DATA_PATH}/opt/basequery/share/basequery"
   DESTINATION "share"
   COMPONENT basequery
 )
